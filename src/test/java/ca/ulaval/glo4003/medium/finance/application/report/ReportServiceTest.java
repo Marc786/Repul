@@ -1,5 +1,9 @@
 package ca.ulaval.glo4003.medium.finance.application.report;
 
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
+import static org.junit.jupiter.api.Assertions.*;
+
 import ca.ulaval.glo4003.constant.Constants;
 import ca.ulaval.glo4003.fixture.finance.MealKitBillFixture;
 import ca.ulaval.glo4003.fixture.finance.ReportBillFixture;
@@ -18,17 +22,12 @@ import ca.ulaval.glo4003.repul.finance.domain.report.semester_products_by_price.
 import ca.ulaval.glo4003.repul.finance.domain.report.weekly_summaries.WeeklySummary;
 import ca.ulaval.glo4003.repul.finance.domain.value_objects.BillId;
 import ca.ulaval.glo4003.repul.finance.infra.InMemoryBillRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
-import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
-import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ReportServiceTest {
 
