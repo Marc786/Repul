@@ -15,6 +15,7 @@ import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SubscriptionTest {
+
     private final LocalDate NOW = LocalDate.of(2024, 2, 1);
     private final SubscriptionFixture subscriptionFixture = new SubscriptionFixture();
     private Subscription subscription;
