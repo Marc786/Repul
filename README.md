@@ -1,5 +1,14 @@
-# Rep-ul
-Application to Manage Laval University's Meal Kit Service.
+# Repul-GLO-4003
+## Français
+Application de gestion de boîte-repas style HelloFresh réalisée dans le cours GLO-4003, Architecture logicielle à l'université Laval.
+
+Pour des raisons de propriété intellectuelle, le code ne peut être public, mais vous pouvez me contacter pour plus d'information.
+
+## English
+Meal box management application similar to HelloFresh developed for the GLO-4003 course, Software Architecture at Laval University.
+
+Due to intellectual property reasons, the code cannot be made public, but feel free to contact me for more information.
+
 
 ## Prerequisites
 
