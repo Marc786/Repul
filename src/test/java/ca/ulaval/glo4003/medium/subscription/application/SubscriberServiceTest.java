@@ -1,13 +1,5 @@
 package ca.ulaval.glo4003.medium.subscription.application;
 
-import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
-import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import ca.ulaval.glo4003.fixture.semester.SemesterFixture;
 import ca.ulaval.glo4003.fixture.subscription.SubscriberFixture;
 import ca.ulaval.glo4003.lib.catalog.MealKitType;
@@ -15,11 +7,7 @@ import ca.ulaval.glo4003.lib.pickup_point_location.PickupPointLocation;
 import ca.ulaval.glo4003.lib.semester.Semester;
 import ca.ulaval.glo4003.lib.semester.registry.finder.SubscriptionSemesterFinder;
 import ca.ulaval.glo4003.repul.subscription.application.SubscriberService;
-import ca.ulaval.glo4003.repul.subscription.domain.BillClient;
-import ca.ulaval.glo4003.repul.subscription.domain.MealClient;
-import ca.ulaval.glo4003.repul.subscription.domain.ShipmentClient;
-import ca.ulaval.glo4003.repul.subscription.domain.Subscriber;
-import ca.ulaval.glo4003.repul.subscription.domain.SubscriberId;
+import ca.ulaval.glo4003.repul.subscription.domain.*;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.Subscription;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.SubscriptionFactory;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.exception.SubscriptionDoesNotBelongToSubscriberException;
@@ -28,11 +16,21 @@ import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.Subscri
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.value_object.Frequency;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.value_object.SubscriptionId;
 import ca.ulaval.glo4003.repul.subscription.infra.InMemorySubscriberRepository;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class SubscriberServiceTest {
 
@@ -70,6 +68,11 @@ class SubscriberServiceTest {
                 mealClientMock,
                 shipmentClientMock
             );
+    }
+
+    @AfterEach
+    void teardown() {
+        resetClock();
     }
 
     @Test
@@ -124,7 +127,6 @@ class SubscriberServiceTest {
             .getSubscriptions()
             .size();
         assertEquals(expectedNumberOfSubscription, actualNumberOfSubscription);
-        resetClock();
     }
 
     @Test
@@ -146,7 +148,6 @@ class SubscriberServiceTest {
             .getSubscriptions()
             .size();
         assertEquals(expectedNumberOfSubscription, actualNumberOfSubscription);
-        resetClock();
     }
 
     @Test
@@ -168,7 +169,6 @@ class SubscriberServiceTest {
         );
 
         assertEquals(expectedNumberOfSubscription, actualSubscriptions.size());
-        resetClock();
     }
 
     @Test
@@ -184,6 +184,7 @@ class SubscriberServiceTest {
 
     @Test
     void existingSubscriber_confirmMealKit_mealKitIsPaid() {
+        setClock(NOW);
         Subscriber subscriberWithExistingSubscription = subscriberFixture
             .withId(SUBSCRIBER_ID)
             .buildWithExistingSubscription();
@@ -208,6 +209,7 @@ class SubscriberServiceTest {
 
     @Test
     void refuseMealKit_confirmMealKit_mealKitIsRefused() {
+        setClock(NOW);
         Subscriber subscriberWithExistingSubscription = subscriberFixture
             .withId(SUBSCRIBER_ID)
             .buildWithExistingSubscription();

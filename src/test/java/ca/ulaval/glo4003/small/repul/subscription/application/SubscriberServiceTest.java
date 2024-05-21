@@ -1,18 +1,9 @@
 package ca.ulaval.glo4003.small.repul.subscription.application;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import ca.ulaval.glo4003.fixture.subscription.SubscriberFixture;
 import ca.ulaval.glo4003.lib.semester.registry.finder.SubscriptionSemesterFinder;
 import ca.ulaval.glo4003.repul.subscription.application.SubscriberService;
-import ca.ulaval.glo4003.repul.subscription.domain.BillClient;
-import ca.ulaval.glo4003.repul.subscription.domain.MealClient;
-import ca.ulaval.glo4003.repul.subscription.domain.ShipmentClient;
-import ca.ulaval.glo4003.repul.subscription.domain.Subscriber;
-import ca.ulaval.glo4003.repul.subscription.domain.SubscriberId;
+import ca.ulaval.glo4003.repul.subscription.domain.*;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.SubscriptionFactory;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.MealKit;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.value_object.SubscriptionId;
@@ -21,8 +12,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
+import static org.mockito.Mockito.*;
+
 class SubscriberServiceTest {
 
+    private final LocalDate NOW = LocalDate.of(2024, 2, 1);
     private static final boolean IS_ACCEPTED = true;
     private static final SubscriberFixture subscriberFixture = new SubscriberFixture();
     private static final SubscriberId SUBSCRIBER_ID = new SubscriberId("123");
@@ -65,10 +63,12 @@ class SubscriberServiceTest {
             mealClientMock,
             shipmentClientMock
         );
+        resetClock();
     }
 
     @Test
     void confirmSubscription_clientIsBilled() {
+        setClock(NOW);
         when(subscriberRepositoryMock.findById(SUBSCRIBER_ID)).thenReturn(SUBSCRIBER);
 
         subscriberService.confirmMealKit(SUBSCRIBER_ID, SUBSCRIPTION_ID, IS_ACCEPTED);
@@ -83,6 +83,7 @@ class SubscriberServiceTest {
 
     @Test
     void confirmSubscription_mealIsAddedToPrepare() {
+        setClock(NOW);
         when(subscriberRepositoryMock.findById(SUBSCRIBER_ID)).thenReturn(SUBSCRIBER);
 
         subscriberService.confirmMealKit(SUBSCRIBER_ID, SUBSCRIPTION_ID, IS_ACCEPTED);

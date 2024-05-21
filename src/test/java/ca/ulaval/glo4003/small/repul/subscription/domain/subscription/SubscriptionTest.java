@@ -1,16 +1,21 @@
 package ca.ulaval.glo4003.small.repul.subscription.domain.subscription;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import ca.ulaval.glo4003.fixture.subscription.SubscriptionFixture;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.Subscription;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.MealKit;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.SubscriberConfirmationStatus;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class SubscriptionTest {
+import java.time.LocalDate;
 
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class SubscriptionTest {
+    private final LocalDate NOW = LocalDate.of(2024, 2, 1);
     private final SubscriptionFixture subscriptionFixture = new SubscriptionFixture();
     private Subscription subscription;
 
@@ -19,8 +24,14 @@ class SubscriptionTest {
         subscription = subscriptionFixture.build();
     }
 
+    @AfterEach
+    void tearDown() {
+        resetClock();
+    }
+
     @Test
     void confirm_nextMealKitIsConfirmed() {
+        setClock(NOW);
         subscription.generateNextMealKit();
 
         subscription.confirmNextMealKit();
@@ -34,6 +45,7 @@ class SubscriptionTest {
 
     @Test
     void refuse_nextMealKitIsRefused() {
+        setClock(NOW);
         subscription.generateNextMealKit();
 
         subscription.refuseNextMealKit();
@@ -47,6 +59,8 @@ class SubscriptionTest {
 
     @Test
     void generateNextMealKit_nextMealKitIsGenerated() {
+        setClock(NOW);
+
         subscription.generateNextMealKit();
 
         MealKit mealKit = subscription.getNextMealKit();

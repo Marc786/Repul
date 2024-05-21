@@ -1,19 +1,25 @@
 package ca.ulaval.glo4003.small.repul.subscription.domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
 import ca.ulaval.glo4003.fixture.subscription.SubscriptionFixture;
 import ca.ulaval.glo4003.repul.subscription.domain.*;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.Subscription;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.MealKit;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.SubscriberConfirmationStatus;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 public class SubscriberTest {
 
+    private final LocalDate NOW = LocalDate.of(2024, 2, 1);
     private static final SubscriberId SUBSCRIBER_ID = new SubscriberId("subscriberId");
     private static final SubscriptionFixture subscriptionFixture =
         new SubscriptionFixture();
@@ -29,6 +35,11 @@ public class SubscriberTest {
         subscription = subscriptionFixture.build();
     }
 
+    @AfterEach
+    void tearDown() {
+        resetClock();
+    }
+
     @Test
     void addSubscription_subscriptionIsAdded() {
         subscriber.addSubscription(subscription);
@@ -38,6 +49,7 @@ public class SubscriberTest {
 
     @Test
     void confirmNextMealKit_subscriptionIsConfirmed() {
+        setClock(NOW);
         subscription.generateNextMealKit();
         subscriber.addSubscription(subscription);
 
@@ -49,6 +61,7 @@ public class SubscriberTest {
 
     @Test
     void refuseNextMealKit_subscriptionIsRefused() {
+        setClock(NOW);
         subscription.generateNextMealKit();
         subscriber.addSubscription(subscription);
 
@@ -63,6 +76,7 @@ public class SubscriberTest {
 
     @Test
     void generateNextMealKit_subscriptionIsGenerated() {
+        setClock(NOW);
         subscriber.addSubscription(subscription);
 
         subscriber.generateNextMealKit(subscription.getId());
@@ -76,6 +90,7 @@ public class SubscriberTest {
 
     @Test
     void addMealToPrepare_mealIsAddedToPrepare() {
+        setClock(NOW);
         subscription.generateNextMealKit();
         subscriber.addSubscription(subscription);
 
@@ -86,6 +101,7 @@ public class SubscriberTest {
 
     @Test
     void addConfirmedMealKitShipmentItem_confirmedMealKitShipmentItemIsAdded() {
+        setClock(NOW);
         subscription.generateNextMealKit();
         subscriber.addSubscription(subscription);
 
