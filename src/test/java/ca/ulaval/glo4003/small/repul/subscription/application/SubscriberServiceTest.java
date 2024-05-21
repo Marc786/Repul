@@ -1,5 +1,9 @@
 package ca.ulaval.glo4003.small.repul.subscription.application;
 
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
+import static org.mockito.Mockito.*;
+
 import ca.ulaval.glo4003.fixture.subscription.SubscriberFixture;
 import ca.ulaval.glo4003.lib.semester.registry.finder.SubscriptionSemesterFinder;
 import ca.ulaval.glo4003.repul.subscription.application.SubscriberService;
@@ -8,15 +12,10 @@ import ca.ulaval.glo4003.repul.subscription.domain.subscription.SubscriptionFact
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.MealKit;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.value_object.SubscriptionId;
 import ca.ulaval.glo4003.repul.subscription.infra.InMemorySubscriberRepository;
+import java.time.LocalDate;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
-import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
-import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
-import static org.mockito.Mockito.*;
 
 class SubscriberServiceTest {
 

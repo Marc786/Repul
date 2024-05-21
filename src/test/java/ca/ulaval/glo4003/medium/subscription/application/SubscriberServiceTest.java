@@ -1,5 +1,13 @@
 package ca.ulaval.glo4003.medium.subscription.application;
 
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
+import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import ca.ulaval.glo4003.fixture.semester.SemesterFixture;
 import ca.ulaval.glo4003.fixture.subscription.SubscriberFixture;
 import ca.ulaval.glo4003.lib.catalog.MealKitType;
@@ -16,21 +24,12 @@ import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.Subscri
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.value_object.Frequency;
 import ca.ulaval.glo4003.repul.subscription.domain.subscription.value_object.SubscriptionId;
 import ca.ulaval.glo4003.repul.subscription.infra.InMemorySubscriberRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
-
-import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
-import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class SubscriberServiceTest {
 

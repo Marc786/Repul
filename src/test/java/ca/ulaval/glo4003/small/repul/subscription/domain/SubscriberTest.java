@@ -1,21 +1,20 @@
 package ca.ulaval.glo4003.small.repul.subscription.domain;
 
-import ca.ulaval.glo4003.fixture.subscription.SubscriptionFixture;
-import ca.ulaval.glo4003.repul.subscription.domain.*;
-import ca.ulaval.glo4003.repul.subscription.domain.subscription.Subscription;
-import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.MealKit;
-import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.SubscriberConfirmationStatus;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
 import static ca.ulaval.glo4003.constant.Constants.ClockSetup.resetClock;
 import static ca.ulaval.glo4003.constant.Constants.ClockSetup.setClock;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+
+import ca.ulaval.glo4003.fixture.subscription.SubscriptionFixture;
+import ca.ulaval.glo4003.repul.subscription.domain.*;
+import ca.ulaval.glo4003.repul.subscription.domain.subscription.Subscription;
+import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.MealKit;
+import ca.ulaval.glo4003.repul.subscription.domain.subscription.meal_kit.SubscriberConfirmationStatus;
+import java.time.LocalDate;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SubscriberTest {
 
